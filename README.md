@@ -1,6 +1,7 @@
 # trabalho-objetos-de-aprendizagem
 
-## Público ALvo
+## Público Alvo
+O Objeto de Aprendizagem é destinado a Estudantes de Graduação (Ciência da Computação, Sistemas de Informação ou Análise e Desenvolvimento de Sistemas) que estão cursando a disciplina de Banco de Dados I ou II, além de Profissionais de Tecnologia em Início de Carreira (Devs Junior e Analistas de Dados Trainee).
 
 ## Requisitos de Aprendizagem
 
