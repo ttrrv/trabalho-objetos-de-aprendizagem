@@ -45,7 +45,7 @@ O Objeto de Aprendizagem é destinado a Estudantes de Graduação (Ciência da C
     Taxonomia de Bloom: Criar
 
 ## Mapa Conceitual
-https://cmapcloud.ihmc.us/cmaps/myCmaps.html#tab-22KK7SJ0YV47RYHF7D2SX
+[Mapa conceitual Junções](https://cmapscloud.ihmc.us:443/rid=22Q3S7MFF-R3VZ8T-VYND0)
 
 ## Mapa Instrucional
 PENDENTE
