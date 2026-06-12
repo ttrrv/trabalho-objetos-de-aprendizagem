@@ -1,0 +1,73 @@
+@startuml
+title Modelo Instrucional de Aprendizado - SQL JOINs
+
+state Conceitos_básicos.apresentação
+state Conceitos_básicos.exemplos
+state Conceitos_básicos.questões
+
+state inner_join.apresentação
+state inner_join.exemplos
+state inner_join.questões
+
+state left_join.apresentação
+state left_join.exemplos
+state left_join.questões
+
+state right_join.apresentação
+state right_join.exemplos
+state right_join.questões
+
+state full_outer_join.apresentação
+state full_outer_join.exemplos
+state full_outer_join.questões
+
+state consultas_complexas.apresentação
+state consultas_complexas.exemplos
+state consultas_complexas.questões
+
+[*] -> Conceitos_básicos.apresentação: inicio
+
+' ========================================================
+' Bloco 1: Conceitos e Fundamentos do JOIN
+' ========================================================
+Conceitos_básicos.apresentação --> Conceitos_básicos.exemplos: concluirApresentacao
+Conceitos_básicos.exemplos --> Conceitos_básicos.questões: concluirExemplos
+Conceitos_básicos.questões --> Conceitos_básicos.apresentação: respostaIncorreta
+Conceitos_básicos.questões ---> inner_join.apresentação: respostaCorreta
+
+' ========================================================
+' Bloco 2: Tipos de JOIN (Navegação Sequencial Educativa)
+' ========================================================
+' Sub-bloco 2.1: Inner Join
+inner_join.apresentação --> inner_join.exemplos: concluirApresentacao
+inner_join.exemplos --> inner_join.questões: concluirExemplos
+inner_join.questões --> inner_join.apresentação: respostaIncorreta
+inner_join.questões --> left_join.apresentação: respostaCorreta
+
+' Sub-bloco 2.2: Left Join
+left_join.apresentação --> left_join.exemplos: concluirApresentacao
+left_join.exemplos --> left_join.questões: concluirExemplos
+left_join.questões --> left_join.apresentação: respostaIncorreta
+left_join.questões --> right_join.apresentação: respostaCorreta
+
+' Sub-bloco 2.3: Right Join
+right_join.apresentação --> right_join.exemplos: concluirApresentacao
+right_join.exemplos --> right_join.questões: concluirExemplos
+right_join.questões --> right_join.apresentação: respostaIncorreta
+right_join.questões --> full_outer_join.apresentação: respostaCorreta
+
+' Sub-bloco 2.4: Full Outer Join
+full_outer_join.apresentação --> full_outer_join.exemplos: concluirApresentacao
+full_outer_join.exemplos --> full_outer_join.questões: concluirExemplos
+full_outer_join.questões --> full_outer_join.apresentação: respostaIncorreta
+full_outer_join.questões --> consultas_complexas.apresentação: respostaCorreta
+
+' ========================================================
+' Bloco 3: Exemplos de Consultas Complexas
+' ========================================================
+consultas_complexas.apresentação --> consultas_complexas.exemplos: concluirApresentacao
+consultas_complexas.exemplos --> consultas_complexas.questões: concluirExemplos
+consultas_complexas.questões --> consultas_complexas.apresentação: respostaIncorreta
+consultas_complexas.questões --> [*]: concluirModulo
+
+@enduml
