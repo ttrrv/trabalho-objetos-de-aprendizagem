@@ -40,14 +40,9 @@ state joins{
     }
   }
 
-  state consultas_complexas {
-    state apresentacao
-    state exemplos
-    state questoes
-  }
-
-  state apresentar_notas {
-
+  state questionario {
+    state responder_questoes
+    state apresentar_notas
   }
 
 ' ========================================================
@@ -92,21 +87,18 @@ state joins{
   conceitos_join.full_outer_join.questoes -down-> conceitos_join.finalizar_modulo: respostaCorreta
 
 ' Transição apresentar_notas
-  conceitos_join.apresentar_notas -up-> conceitos_join.selecionar_modulo: moduloIncompleto
-  conceitos_join.apresentar_notas : Estado intermediário para organização
+  conceitos_join.voltar_selecao -up-> conceitos_join.selecionar_modulo: moduloIncompleto
+  conceitos_join.voltar_selecao : Estado intermediário para organização
 
 ' Transição finalizar_modulo
-  conceitos_join.finalizar_modulo --up-> conceitos_join.apresentar_notas: moduloIncompleto
-  conceitos_join.finalizar_modulo -down-> consultas_complexas.apresentacao: modulosCompletos
+  conceitos_join.finalizar_modulo --up-> conceitos_join.voltar_selecao: moduloIncompleto
+  conceitos_join.finalizar_modulo -down-> questionario.responder_questoes: modulosCompletos
 ' ========================================================
 ' Bloco 3: Exemplos de Consultas Complexas
 ' ========================================================
-  consultas_complexas.apresentacao --> consultas_complexas.exemplos: concluirApresentacao
-  consultas_complexas.exemplos --> consultas_complexas.questoes: concluirExemplos
-  consultas_complexas.questoes --> consultas_complexas.apresentacao: respostaIncorreta
-  consultas_complexas.questoes --> apresentar_notas: concluirModulo
+  questionario.responder_questoes --> questionario.apresentar_notas: finalizarQuestoes
 
   ' Apresentação final das notas
-  apresentar_notas --> [*]
+  questionario.apresentar_notas --> [*]
 }
 @enduml
