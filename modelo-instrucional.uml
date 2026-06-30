@@ -46,6 +46,10 @@ state joins{
     state questoes
   }
 
+  state apresentar_notas {
+
+  }
+
 ' ========================================================
 ' Bloco 1: Conceitos e Fundamentos do JOIN
 ' ========================================================
@@ -100,6 +104,9 @@ state joins{
   consultas_complexas.apresentacao --> consultas_complexas.exemplos: concluirApresentacao
   consultas_complexas.exemplos --> consultas_complexas.questoes: concluirExemplos
   consultas_complexas.questoes --> consultas_complexas.apresentacao: respostaIncorreta
-  consultas_complexas.questoes --> [*]: concluirModulo
+  consultas_complexas.questoes --> apresentar_notas: concluirModulo
+
+  ' Apresentação final das notas
+  apresentar_notas --> [*]
 }
 @enduml
