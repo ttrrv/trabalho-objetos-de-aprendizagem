@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Objeto de Aprendizagem: JOINs em SQL</title>
+  <style>
+    body { font-family: Arial, sans-serif; line-height: 1.6; margin: 0; padding: 0; background: #f5f7fb; color: #222; }
+    header, section { max-width: 900px; margin: auto; padding: 24px; }
+    header { background: #1c3d5a; color: #fff; }
+    h1, h2, h3 { margin-top: 0; }
+    .card { background: #fff; border-radius: 10px; padding: 18px; box-shadow: 0 2px 10px rgba(0,0,0,.08); margin-bottom: 18px; }
+    nav { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 20px; }
+    nav a { color: #1c3d5a; text-decoration: none; border: 1px solid #1c3d5a; border-radius: 6px; padding: 8px 12px; }
+    nav a:hover { background: #1c3d5a; color: #fff; }
+    pre { background: #eef2f7; padding: 14px; border-radius: 8px; overflow-x: auto; }
+    button { border: none; border-radius: 6px; padding: 10px 14px; background: #1c3d5a; color: #fff; cursor: pointer; }
+    button:hover { background: #16314a; }
+    .hidden { display: none; }
+    .quiz-answer { margin-top: 10px; padding: 10px; border-radius: 6px; }
+    .correct { background: #d4f5d8; color: #1b5f2d; }
+    .wrong { background: #ffe1dd; color: #7a2b20; }
+  </style>
+</head>
+<body>
+  <header>
+    <section>
+      <h1>Objeto de Aprendizagem: JOINs em SQL</h1>
+      <p>Destinado a estudantes de Banco de Dados e profissionais de tecnologia em início de carreira.</p>
+      <p>Objetivo: compreender, aplicar e comparar INNER JOIN, LEFT JOIN, RIGHT JOIN, FULL OUTER JOIN e consultas complexas.</p>
+    </section>
+  </header>
+
+  <section>
+    <div class="card">
+      <h2>Como usar</h2>
+      <p>Progrida etapa a etapa: responda corretamente para desbloquear o próximo bloco.</p>
+    </div>
+
+    <nav id="steps-nav" aria-hidden="true" style="margin-bottom:16px;"></nav>
+
+    <!-- Etapas sequenciais: cada .step será desbloqueada apenas se a pergunta for respondida corretamente -->
+    <div class="card step" id="step-conceitos" data-step="0">
+      <h2>1. Conceitos básicos de JOIN</h2>
+      <p>JOINs combinam tabelas pela correspondência de colunas. Eles ajudam a consultar dados relacionados em diferentes tabelas sem duplicar informações.</p>
+      <ul>
+        <li><strong>INNER JOIN</strong>: retorna apenas registros com correspondência em ambas as tabelas.</li>
+        <li><strong>LEFT JOIN</strong>: traz todos os registros da tabela à esquerda e os correspondentes da direita.</li>
+        <li><strong>RIGHT JOIN</strong>: traz todos os registros da tabela à direita e os correspondentes da esquerda.</li>
+        <li><strong>FULL OUTER JOIN</strong>: traz todos os registros de ambas as tabelas, com correspondência quando existir.</li>
+      </ul>
+      <pre><code>SELECT e.nome, d.nome AS departamento
+FROM empregados e
+INNER JOIN departamentos d
+  ON e.departamento_id = d.id;</code></pre>
+      <div style="margin-top:12px">
+        <p><strong>Pergunta:</strong> Qual JOIN retorna apenas os registros com correspondência em ambas as tabelas?</p>
+        <div>
+          <button onclick="answerQuestion(0,'a')">A) LEFT JOIN</button>
+          <button onclick="answerQuestion(0,'b')">B) RIGHT JOIN</button>
+          <button onclick="answerQuestion(0,'c')">C) INNER JOIN</button>
+          <button onclick="answerQuestion(0,'d')">D) FULL OUTER JOIN</button>
+        </div>
+        <div id="feedback-0" class="quiz-answer hidden"></div>
+        <div style="margin-top:10px"><button id="next-0" onclick="nextStep(0)" disabled>Avançar</button></div>
+      </div>
+    </div>
+
+    <div class="card step hidden" id="step-inner" data-step="1">
+      <h2>2. INNER JOIN</h2>
+      <p>Use INNER JOIN para encontrar pares correspondentes. É a forma mais comum em consultas relacionais.</p>
+      <pre><code>SELECT c.nome, p.titulo
+FROM clientes c
+INNER JOIN pedidos p
+  ON c.id = p.cliente_id;</code></pre>
+      <div style="margin-top:12px">
+        <p><strong>Pergunta:</strong> Em um INNER JOIN, linhas sem correspondência são:</p>
+        <div>
+          <button onclick="answerQuestion(1,'a')">A) Exibidas com valores nulos</button>
+          <button onclick="answerQuestion(1,'b')">B) Ignoradas</button>
+          <button onclick="answerQuestion(1,'c')">C) Duplicadas</button>
+        </div>
+        <div id="feedback-1" class="quiz-answer hidden"></div>
+        <div style="margin-top:10px"><button id="next-1" onclick="nextStep(1)" disabled>Avançar</button></div>
+      </div>
+    </div>
+
+    <div class="card step hidden" id="step-left" data-step="2">
+      <h2>3. LEFT JOIN</h2>
+      <p>LEFT JOIN preserva todas as linhas da tabela esquerda. Quando não há correspondência, os campos da direita ficam nulos.</p>
+      <pre><code>SELECT c.nome, p.titulo
+FROM clientes c
+LEFT JOIN pedidos p
+  ON c.id = p.cliente_id;</code></pre>
+      <div style="margin-top:12px">
+        <p><strong>Pergunta:</strong> Qual JOIN preserva todas as linhas da tabela à esquerda?</p>
+        <div>
+          <button onclick="answerQuestion(2,'a')">A) RIGHT JOIN</button>
+          <button onclick="answerQuestion(2,'b')">B) LEFT JOIN</button>
+          <button onclick="answerQuestion(2,'c')">C) INNER JOIN</button>
+        </div>
+        <div id="feedback-2" class="quiz-answer hidden"></div>
+        <div style="margin-top:10px"><button id="next-2" onclick="nextStep(2)" disabled>Avançar</button></div>
+      </div>
+    </div>
+
+    <div class="card step hidden" id="step-right" data-step="3">
+      <h2>4. RIGHT JOIN</h2>
+      <p>RIGHT JOIN preserva todas as linhas da tabela direita. É útil quando o foco está na segunda tabela do JOIN.</p>
+      <pre><code>SELECT p.titulo, c.nome
+FROM clientes c
+RIGHT JOIN pedidos p
+  ON c.id = p.cliente_id;</code></pre>
+      <div style="margin-top:12px">
+        <p><strong>Pergunta:</strong> RIGHT JOIN preserva todas as linhas de qual tabela?</p>
+        <div>
+          <button onclick="answerQuestion(3,'a')">A) Tabela esquerda</button>
+          <button onclick="answerQuestion(3,'b')">B) Tabela direita</button>
+        </div>
+        <div id="feedback-3" class="quiz-answer hidden"></div>
+        <div style="margin-top:10px"><button id="next-3" onclick="nextStep(3)" disabled>Avançar</button></div>
+      </div>
+    </div>
+
+    <div class="card step hidden" id="step-full" data-step="4">
+      <h2>5. FULL OUTER JOIN</h2>
+      <p>FULL OUTER JOIN retorna todos os registros de ambas as tabelas. Registros sem correspondência aparecem com campos nulos do outro lado.</p>
+      <pre><code>SELECT e.nome, d.nome AS departamento
+FROM empregados e
+FULL OUTER JOIN departamentos d
+  ON e.departamento_id = d.id;</code></pre>
+      <div style="margin-top:12px">
+        <p><strong>Pergunta:</strong> Qual JOIN retorna todos os registros de ambas as tabelas?</p>
+        <div>
+          <button onclick="answerQuestion(4,'a')">A) INNER JOIN</button>
+          <button onclick="answerQuestion(4,'b')">B) FULL OUTER JOIN</button>
+        </div>
+        <div id="feedback-4" class="quiz-answer hidden"></div>
+        <div style="margin-top:10px"><button id="next-4" onclick="nextStep(4)" disabled>Avançar</button></div>
+      </div>
+    </div>
+
+    <div class="card step hidden" id="step-complexo" data-step="5">
+      <h2>6. Consultas complexas</h2>
+      <p>Combine JOINs com subconsultas ou múltiplos relacionamentos para resolver demandas reais.</p>
+      <pre><code>SELECT c.nome, p.titulo, s.status
+FROM clientes c
+INNER JOIN pedidos p ON c.id = p.cliente_id
+LEFT JOIN situacoes s ON p.situacao_id = s.id
+WHERE p.data >= '2026-01-01';</code></pre>
+      <div style="margin-top:12px">
+        <p><strong>Pergunta:</strong> Para incluir todos os clientes mesmo sem pedidos, qual JOIN usaríamos entre clientes e pedidos?</p>
+        <div>
+          <button onclick="answerQuestion(5,'a')">A) INNER JOIN</button>
+          <button onclick="answerQuestion(5,'b')">B) LEFT JOIN</button>
+        </div>
+        <div id="feedback-5" class="quiz-answer hidden"></div>
+        <div style="margin-top:10px"><button id="next-5" onclick="finishCourse(5)" disabled>Concluir módulo</button></div>
+      </div>
+    </div>
+
+    <div class="card hidden" id="final-message">
+      <h2>Parabéns!</h2>
+      <p>Você concluiu o módulo básico sobre JOINs. Revise os blocos conforme necessário.</p>
+    </div>
+  </section>
+
+  <script>
+    const steps = ['step-conceitos','step-inner','step-left','step-right','step-full','step-complexo'];
+
+    function init() {
+      const nav = document.getElementById('steps-nav');
+      steps.forEach((id, idx) => {
+        const el = document.getElementById(id);
+        const title = el ? el.querySelector('h2').textContent.replace(/^[0-9]+\.\s*/,'') : ('Etapa ' + (idx+1));
+        const btn = document.createElement('button');
+        btn.textContent = (idx+1) + '. ' + title;
+        btn.disabled = idx !== 0;
+        btn.onclick = () => showStep(idx);
+        nav.appendChild(btn);
+      });
+      showStep(0);
+    }
+
+    function showStep(index) {
+      steps.forEach((id, idx) => {
+        const el = document.getElementById(id);
+        if (!el) return;
+        if (idx === index) el.classList.remove('hidden'); else el.classList.add('hidden');
+      });
+      const nav = document.getElementById('steps-nav');
+      Array.from(nav.children).forEach((b, i) => {
+        const unlocked = document.getElementById(steps[i]).dataset.unlocked === 'true';
+        b.disabled = !(unlocked || i === index);
+      });
+      window.scrollTo({top:0, behavior:'smooth'});
+    }
+
+    function answerQuestion(stepIndex, choice) {
+      const correct = {0:'c',1:'b',2:'b',3:'b',4:'b',5:'b'};
+      const feedback = document.getElementById('feedback-' + stepIndex);
+      if (!feedback) return;
+      if (choice === correct[stepIndex]) {
+        feedback.className = 'quiz-answer correct';
+        feedback.textContent = 'Correto — você pode avançar.';
+        const nextBtn = document.getElementById('next-' + stepIndex);
+        if (nextBtn) nextBtn.disabled = false;
+        const next = stepIndex + 1;
+        if (steps[next]) {
+          document.getElementById(steps[next]).dataset.unlocked = 'true';
+          const nav = document.getElementById('steps-nav');
+          if (nav.children[next]) nav.children[next].disabled = false;
+        }
+      } else {
+        feedback.className = 'quiz-answer wrong';
+        feedback.textContent = 'Incorreto — reveja o bloco e tente novamente.';
+      }
+      feedback.classList.remove('hidden');
+    }
+
+    function nextStep(currentIndex) {
+      const next = currentIndex + 1;
+      if (steps[next] && document.getElementById(steps[next]).dataset.unlocked === 'true') showStep(next);
+    }
+
+    function finishCourse() {
+      steps.forEach(id => { const el = document.getElementById(id); if (el) el.classList.add('hidden'); });
+      document.getElementById('final-message').classList.remove('hidden');
+      document.getElementById('steps-nav').querySelectorAll('button').forEach(b => b.disabled = true);
+    }
+
+    window.addEventListener('DOMContentLoaded', init);
+  </script>
+</body>
+</html>
