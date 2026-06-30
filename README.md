@@ -50,7 +50,5 @@ O Objeto de Aprendizagem é destinado a Estudantes de Graduação (Ciência da C
 ## Mapa Instrucional
 <img width="1616" height="1669" alt="modelo_instrucional" src="https://github.com/user-attachments/assets/f9290145-f132-4e78-82ef-a69d6fc56339" />
 
-
-
-
-
+## Instruções e arquivos necessários para a construção do objeto de aprendizagem
+O objeto de aprendizagem foi desenvolvido no arquivo ```objeto-aprendizagem.html``` utilizando html e javascript para controle do fluxo, ele pode ser acessado por meio de um navegador web.
