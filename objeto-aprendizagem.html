@@ -1,235 +1,835 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Objeto de Aprendizagem: JOINs em SQL</title>
-  <style>
-    body { font-family: Arial, sans-serif; line-height: 1.6; margin: 0; padding: 0; background: #f5f7fb; color: #222; }
-    header, section { max-width: 900px; margin: auto; padding: 24px; }
-    header { background: #1c3d5a; color: #fff; }
-    h1, h2, h3 { margin-top: 0; }
-    .card { background: #fff; border-radius: 10px; padding: 18px; box-shadow: 0 2px 10px rgba(0,0,0,.08); margin-bottom: 18px; }
-    nav { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 20px; }
-    nav a { color: #1c3d5a; text-decoration: none; border: 1px solid #1c3d5a; border-radius: 6px; padding: 8px 12px; }
-    nav a:hover { background: #1c3d5a; color: #fff; }
-    pre { background: #eef2f7; padding: 14px; border-radius: 8px; overflow-x: auto; }
-    button { border: none; border-radius: 6px; padding: 10px 14px; background: #1c3d5a; color: #fff; cursor: pointer; }
-    button:hover { background: #16314a; }
-    .hidden { display: none; }
-    .quiz-answer { margin-top: 10px; padding: 10px; border-radius: 6px; }
-    .correct { background: #d4f5d8; color: #1b5f2d; }
-    .wrong { background: #ffe1dd; color: #7a2b20; }
-  </style>
-</head>
-<body>
-  <header>
-    <section>
-      <h1>Objeto de Aprendizagem: JOINs em SQL</h1>
-      <p>Destinado a estudantes de Banco de Dados e profissionais de tecnologia em início de carreira.</p>
-      <p>Objetivo: compreender, aplicar e comparar INNER JOIN, LEFT JOIN, RIGHT JOIN, FULL OUTER JOIN e consultas complexas.</p>
-    </section>
-  </header>
-
-  <section>
-    <div class="card">
-      <h2>Como usar</h2>
-      <p>Progrida etapa a etapa: responda corretamente para desbloquear o próximo bloco.</p>
-    </div>
-
-    <nav id="steps-nav" aria-hidden="true" style="margin-bottom:16px;"></nav>
-
-    <!-- Etapas sequenciais: cada .step será desbloqueada apenas se a pergunta for respondida corretamente -->
-    <div class="card step" id="step-conceitos" data-step="0">
-      <h2>1. Conceitos básicos de JOIN</h2>
-      <p>JOINs combinam tabelas pela correspondência de colunas. Eles ajudam a consultar dados relacionados em diferentes tabelas sem duplicar informações.</p>
-      <ul>
-        <li><strong>INNER JOIN</strong>: retorna apenas registros com correspondência em ambas as tabelas.</li>
-        <li><strong>LEFT JOIN</strong>: traz todos os registros da tabela à esquerda e os correspondentes da direita.</li>
-        <li><strong>RIGHT JOIN</strong>: traz todos os registros da tabela à direita e os correspondentes da esquerda.</li>
-        <li><strong>FULL OUTER JOIN</strong>: traz todos os registros de ambas as tabelas, com correspondência quando existir.</li>
-      </ul>
-      <pre><code>SELECT e.nome, d.nome AS departamento
-FROM empregados e
-INNER JOIN departamentos d
-  ON e.departamento_id = d.id;</code></pre>
-      <div style="margin-top:12px">
-        <p><strong>Pergunta:</strong> Qual JOIN retorna apenas os registros com correspondência em ambas as tabelas?</p>
-        <div>
-          <button onclick="answerQuestion(0,'a')">A) LEFT JOIN</button>
-          <button onclick="answerQuestion(0,'b')">B) RIGHT JOIN</button>
-          <button onclick="answerQuestion(0,'c')">C) INNER JOIN</button>
-          <button onclick="answerQuestion(0,'d')">D) FULL OUTER JOIN</button>
-        </div>
-        <div id="feedback-0" class="quiz-answer hidden"></div>
-        <div style="margin-top:10px"><button id="next-0" onclick="nextStep(0)" disabled>Avançar</button></div>
-      </div>
-    </div>
-
-    <div class="card step hidden" id="step-inner" data-step="1">
-      <h2>2. INNER JOIN</h2>
-      <p>Use INNER JOIN para encontrar pares correspondentes. É a forma mais comum em consultas relacionais.</p>
-      <pre><code>SELECT c.nome, p.titulo
-FROM clientes c
-INNER JOIN pedidos p
-  ON c.id = p.cliente_id;</code></pre>
-      <div style="margin-top:12px">
-        <p><strong>Pergunta:</strong> Em um INNER JOIN, linhas sem correspondência são:</p>
-        <div>
-          <button onclick="answerQuestion(1,'a')">A) Exibidas com valores nulos</button>
-          <button onclick="answerQuestion(1,'b')">B) Ignoradas</button>
-          <button onclick="answerQuestion(1,'c')">C) Duplicadas</button>
-        </div>
-        <div id="feedback-1" class="quiz-answer hidden"></div>
-        <div style="margin-top:10px"><button id="next-1" onclick="nextStep(1)" disabled>Avançar</button></div>
-      </div>
-    </div>
-
-    <div class="card step hidden" id="step-left" data-step="2">
-      <h2>3. LEFT JOIN</h2>
-      <p>LEFT JOIN preserva todas as linhas da tabela esquerda. Quando não há correspondência, os campos da direita ficam nulos.</p>
-      <pre><code>SELECT c.nome, p.titulo
-FROM clientes c
-LEFT JOIN pedidos p
-  ON c.id = p.cliente_id;</code></pre>
-      <div style="margin-top:12px">
-        <p><strong>Pergunta:</strong> Qual JOIN preserva todas as linhas da tabela à esquerda?</p>
-        <div>
-          <button onclick="answerQuestion(2,'a')">A) RIGHT JOIN</button>
-          <button onclick="answerQuestion(2,'b')">B) LEFT JOIN</button>
-          <button onclick="answerQuestion(2,'c')">C) INNER JOIN</button>
-        </div>
-        <div id="feedback-2" class="quiz-answer hidden"></div>
-        <div style="margin-top:10px"><button id="next-2" onclick="nextStep(2)" disabled>Avançar</button></div>
-      </div>
-    </div>
-
-    <div class="card step hidden" id="step-right" data-step="3">
-      <h2>4. RIGHT JOIN</h2>
-      <p>RIGHT JOIN preserva todas as linhas da tabela direita. É útil quando o foco está na segunda tabela do JOIN.</p>
-      <pre><code>SELECT p.titulo, c.nome
-FROM clientes c
-RIGHT JOIN pedidos p
-  ON c.id = p.cliente_id;</code></pre>
-      <div style="margin-top:12px">
-        <p><strong>Pergunta:</strong> RIGHT JOIN preserva todas as linhas de qual tabela?</p>
-        <div>
-          <button onclick="answerQuestion(3,'a')">A) Tabela esquerda</button>
-          <button onclick="answerQuestion(3,'b')">B) Tabela direita</button>
-        </div>
-        <div id="feedback-3" class="quiz-answer hidden"></div>
-        <div style="margin-top:10px"><button id="next-3" onclick="nextStep(3)" disabled>Avançar</button></div>
-      </div>
-    </div>
-
-    <div class="card step hidden" id="step-full" data-step="4">
-      <h2>5. FULL OUTER JOIN</h2>
-      <p>FULL OUTER JOIN retorna todos os registros de ambas as tabelas. Registros sem correspondência aparecem com campos nulos do outro lado.</p>
-      <pre><code>SELECT e.nome, d.nome AS departamento
-FROM empregados e
-FULL OUTER JOIN departamentos d
-  ON e.departamento_id = d.id;</code></pre>
-      <div style="margin-top:12px">
-        <p><strong>Pergunta:</strong> Qual JOIN retorna todos os registros de ambas as tabelas?</p>
-        <div>
-          <button onclick="answerQuestion(4,'a')">A) INNER JOIN</button>
-          <button onclick="answerQuestion(4,'b')">B) FULL OUTER JOIN</button>
-        </div>
-        <div id="feedback-4" class="quiz-answer hidden"></div>
-        <div style="margin-top:10px"><button id="next-4" onclick="nextStep(4)" disabled>Avançar</button></div>
-      </div>
-    </div>
-
-    <div class="card step hidden" id="step-complexo" data-step="5">
-      <h2>6. Consultas complexas</h2>
-      <p>Combine JOINs com subconsultas ou múltiplos relacionamentos para resolver demandas reais.</p>
-      <pre><code>SELECT c.nome, p.titulo, s.status
-FROM clientes c
-INNER JOIN pedidos p ON c.id = p.cliente_id
-LEFT JOIN situacoes s ON p.situacao_id = s.id
-WHERE p.data >= '2026-01-01';</code></pre>
-      <div style="margin-top:12px">
-        <p><strong>Pergunta:</strong> Para incluir todos os clientes mesmo sem pedidos, qual JOIN usaríamos entre clientes e pedidos?</p>
-        <div>
-          <button onclick="answerQuestion(5,'a')">A) INNER JOIN</button>
-          <button onclick="answerQuestion(5,'b')">B) LEFT JOIN</button>
-        </div>
-        <div id="feedback-5" class="quiz-answer hidden"></div>
-        <div style="margin-top:10px"><button id="next-5" onclick="finishCourse(5)" disabled>Concluir módulo</button></div>
-      </div>
-    </div>
-
-    <div class="card hidden" id="final-message">
-      <h2>Parabéns!</h2>
-      <p>Você concluiu o módulo básico sobre JOINs. Revise os blocos conforme necessário.</p>
-    </div>
-  </section>
-
-  <script>
-    const steps = ['step-conceitos','step-inner','step-left','step-right','step-full','step-complexo'];
-
-    function init() {
-      const nav = document.getElementById('steps-nav');
-      steps.forEach((id, idx) => {
-        const el = document.getElementById(id);
-        const title = el ? el.querySelector('h2').textContent.replace(/^[0-9]+\.\s*/,'') : ('Etapa ' + (idx+1));
-        const btn = document.createElement('button');
-        btn.textContent = (idx+1) + '. ' + title;
-        btn.disabled = idx !== 0;
-        btn.onclick = () => showStep(idx);
-        nav.appendChild(btn);
-      });
-      showStep(0);
-    }
-
-    function showStep(index) {
-      steps.forEach((id, idx) => {
-        const el = document.getElementById(id);
-        if (!el) return;
-        if (idx === index) el.classList.remove('hidden'); else el.classList.add('hidden');
-      });
-      const nav = document.getElementById('steps-nav');
-      Array.from(nav.children).forEach((b, i) => {
-        const unlocked = document.getElementById(steps[i]).dataset.unlocked === 'true';
-        b.disabled = !(unlocked || i === index);
-      });
-      window.scrollTo({top:0, behavior:'smooth'});
-    }
-
-    function answerQuestion(stepIndex, choice) {
-      const correct = {0:'c',1:'b',2:'b',3:'b',4:'b',5:'b'};
-      const feedback = document.getElementById('feedback-' + stepIndex);
-      if (!feedback) return;
-      if (choice === correct[stepIndex]) {
-        feedback.className = 'quiz-answer correct';
-        feedback.textContent = 'Correto — você pode avançar.';
-        const nextBtn = document.getElementById('next-' + stepIndex);
-        if (nextBtn) nextBtn.disabled = false;
-        const next = stepIndex + 1;
-        if (steps[next]) {
-          document.getElementById(steps[next]).dataset.unlocked = 'true';
-          const nav = document.getElementById('steps-nav');
-          if (nav.children[next]) nav.children[next].disabled = false;
-        }
-      } else {
-        feedback.className = 'quiz-answer wrong';
-        feedback.textContent = 'Incorreto — reveja o bloco e tente novamente.';
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Objeto de Aprendizagem - SQL JOINs</title>
+    <style>
+      :root {
+        --bg: #f4f7fb;
+        --card: #ffffff;
+        --text: #1f2937;
+        --muted: #6b7280;
+        --primary: #2563eb;
+        --primary-dark: #1d4ed8;
+        --accent: #10b981;
+        --warning: #f59e0b;
+        --border: #e5e7eb;
+        --error: #ef4444;
       }
-      feedback.classList.remove('hidden');
-    }
 
-    function nextStep(currentIndex) {
-      const next = currentIndex + 1;
-      if (steps[next] && document.getElementById(steps[next]).dataset.unlocked === 'true') showStep(next);
-    }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        font-family: Arial, Helvetica, sans-serif;
+        background: linear-gradient(135deg, #eff6ff, var(--bg));
+        color: var(--text);
+      }
 
-    function finishCourse() {
-      steps.forEach(id => { const el = document.getElementById(id); if (el) el.classList.add('hidden'); });
-      document.getElementById('final-message').classList.remove('hidden');
-      document.getElementById('steps-nav').querySelectorAll('button').forEach(b => b.disabled = true);
-    }
+      .container {
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 24px;
+      }
 
-    window.addEventListener('DOMContentLoaded', init);
-  </script>
-</body>
+      .hero, .card, .quiz-card {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        box-shadow: 0 8px 24px rgba(15, 23, 42, 0.06);
+      }
+
+      .hero {
+        padding: 24px;
+        margin-bottom: 20px;
+      }
+
+      .hero h1 {
+        margin: 0 0 10px;
+        font-size: 2rem;
+      }
+
+      .hero p {
+        margin: 0;
+        color: var(--muted);
+        line-height: 1.6;
+      }
+
+      .status-bar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 16px;
+        margin-top: 16px;
+        flex-wrap: wrap;
+      }
+
+      .progress {
+        flex: 1;
+        min-width: 250px;
+        height: 10px;
+        background: #dbeafe;
+        border-radius: 999px;
+        overflow: hidden;
+      }
+
+      .progress > div {
+        height: 100%;
+        width: 0%;
+        background: linear-gradient(90deg, var(--primary), var(--accent));
+        transition: width 0.3s ease;
+      }
+
+      .pill {
+        padding: 8px 12px;
+        background: #eff6ff;
+        color: var(--primary-dark);
+        border-radius: 999px;
+        font-size: 0.95rem;
+        font-weight: 600;
+      }
+
+      .layout {
+        display: grid;
+        grid-template-columns: 2.2fr 1fr;
+        gap: 20px;
+      }
+
+      .card, .quiz-card {
+        padding: 20px;
+      }
+
+      .card h2, .quiz-card h3 {
+        margin-top: 0;
+      }
+
+      .card p, .quiz-card p, .card li {
+        line-height: 1.7;
+        color: var(--text);
+      }
+
+      .code-block {
+        background: #0f172a;
+        color: #e2e8f0;
+        padding: 14px;
+        border-radius: 12px;
+        overflow-x: auto;
+        font-family: Consolas, monospace;
+        line-height: 1.5;
+        margin: 12px 0;
+      }
+
+      .db-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 10px 0 18px 0;
+        font-size: 0.9rem;
+      }
+      .db-table th, .db-table td {
+        border: 1px solid var(--border);
+        padding: 8px 12px;
+        text-align: left;
+      }
+      .db-table th {
+        background: #f1f5f9;
+        color: var(--text);
+      }
+
+      .buttons {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 16px;
+      }
+
+      button {
+        border: 0;
+        border-radius: 999px;
+        padding: 10px 18px;
+        cursor: pointer;
+        font-weight: 600;
+        color: white;
+        background: var(--primary);
+        transition: background 0.2s;
+      }
+
+      button:hover { background: var(--primary-dark); }
+      button.secondary { background: #64748b; }
+      button.secondary:hover { background: #475569; }
+
+      .module-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 12px;
+        margin-top: 12px;
+      }
+
+      .module-btn {
+        padding: 14px;
+        text-align: left;
+        border-radius: 12px;
+        background: #f8fafc;
+        color: var(--text);
+        border: 1px solid var(--border);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .module-btn.done {
+        border-color: var(--accent);
+        background: #f0fdf4;
+      }
+
+      .quiz-option {
+        display: block;
+        width: 100%;
+        text-align: left;
+        margin-bottom: 8px;
+        background: #f8fafc;
+        color: var(--text);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        padding: 12px;
+      }
+      .quiz-option:hover:not(:disabled) { 
+        background: #f1f5f9; 
+      }
+      .quiz-option.selected {
+        border-color: var(--primary);
+        background: #eff6ff;
+        color: var(--primary-dark);
+      }
+
+      .feedback {
+        margin-top: 12px;
+        padding: 12px;
+        border-radius: 10px;
+        font-weight: 600;
+      }
+
+      .feedback.success { background: #dcfce7; color: #166534; }
+      .feedback.error { background: #fee2e2; color: #991b1b; }
+
+      .review-item {
+        margin-bottom: 20px;
+        padding: 14px;
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        background: #f8fafc;
+      }
+
+      .review-badge {
+        display: inline-block;
+        padding: 4px 8px;
+        border-radius: 6px;
+        font-size: 0.85rem;
+        font-weight: bold;
+        margin-bottom: 8px;
+      }
+      .review-badge.correct { background: #dcfce7; color: #166534; }
+      .review-badge.incorrect { background: #fee2e2; color: #991b1b; }
+
+      .sidebar {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+      }
+
+      .summary-list {
+        padding-left: 0;
+        list-style: none;
+        margin: 0;
+      }
+
+      /* ATUALIZAÇÃO VISUAL PARA ITENS CLICÁVEIS DO FLUXO */
+      .summary-list li { 
+        margin-bottom: 6px; 
+        color: var(--muted);
+        padding: 8px 12px;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: all 0.2s ease;
+      }
+      
+      .summary-list li:hover {
+        background: #f1f5f9;
+        color: var(--text);
+      }
+      
+      .summary-list li.active-flow {
+        color: var(--primary-dark);
+        background: #eff6ff;
+        font-weight: bold;
+        border-left: 4px solid var(--primary);
+        border-radius: 0 8px 8px 0;
+      }
+
+      @media (max-width: 900px) {
+        .layout { grid-template-columns: 1fr; }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <section class="hero">
+        <h1>Objeto de Aprendizagem: SQL JOINs</h1>
+        <p>Aprenda a relacionar dados de forma estruturada. Siga o fluxo instrucional baseado no modelo UML.</p>
+        <div class="status-bar">
+          <div class="progress"><div id="progressBar"></div></div>
+          <div class="pill" id="stepLabel">Carregando...</div>
+        </div>
+      </section>
+
+      <div class="layout">
+        <section class="card" id="contentCard">
+          <h2 id="contentTitle">Carregando...</h2>
+          <div id="contentBody"></div>
+          <div class="buttons">
+            <button id="backBtn" class="secondary">Voltar</button>
+            <button id="nextBtn">Continuar</button>
+          </div>
+        </section>
+
+        <aside class="sidebar">
+          <section class="quiz-card">
+            <h3>Fluxo instrucional</h3>
+            <ul class="summary-list">
+              <li id="flow-1" data-target="CB_APRESENTACAO">1. Conceitos Básicos</li>
+              <li id="flow-2" data-target="CB_QUESTOES">2. Verificação de Fundamentos</li>
+              <li id="flow-3" data-target="CJ_SELECIONAR_MODULO">3. Módulos Específicos de Junção</li>
+              <li id="flow-4" data-target="QUEST_INTRO">4. Questionário de Fixação (10 Q)</li>
+              <li id="flow-5" data-target="APRESENTAR_NOTAS">5. Avaliação Final & Notas</li>
+            </ul>
+          </section>
+
+          <section class="quiz-card">
+            <h3>Resumo da Etapa</h3>
+            <p id="summaryText">Carregando...</p>
+          </section>
+        </aside>
+      </div>
+    </div>
+
+    <script>
+      const baseTablesHtml = `
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px; margin:15px 0;">
+          <div>
+            <strong>Tabela: clientes (Esquerda)</strong>
+            <table class="db-table">
+              <tr><th>id_cliente</th><th>nome</th></tr>
+              <tr><td>1</td><td>Ana</td></tr>
+              <tr><td>2</td><td>Bruno</td></tr>
+              <tr><td>3</td><td>Carlos</td></tr>
+            </table>
+          </div>
+          <div>
+            <strong>Tabela: pedidos (Direita)</strong>
+            <table class="db-table">
+              <tr><th>id_pedido</th><th>id_cliente</th><th>item</th></tr>
+              <tr><td>101</td><td>1</td><td>Notebook</td></tr>
+              <tr><td>102</td><td>1</td><td>Mouse</td></tr>
+              <tr><td>103</td><td>2</td><td>Teclado</td></tr>
+              <tr><td>104</td><td>4</td><td>Monitor</td></tr>
+            </table>
+          </div>
+        </div>
+      `;
+
+      const joinDetails = {
+        inner: {
+          title: 'INNER JOIN',
+          apresentacao: '<p>O <strong>INNER JOIN</strong> analisa ambas as tabelas e seleciona apenas os registros que possuem chaves correspondentes exatas em ambas.</p>' + baseTablesHtml,
+          exemplos: `
+            <p><strong>Query executada:</strong></p>
+            <div class="code-block">SELECT c.nome, p.item\nFROM clientes c\nINNER JOIN pedidos p ON c.id_cliente = p.id_cliente;</div>
+            <p><strong>Linhas Resultantes:</strong></p>
+            <table class="db-table">
+              <tr><th>nome</th><th>item</th></tr>
+              <tr><td>Ana</td><td>Notebook</td></tr>
+              <tr><td>Ana</td><td>Mouse</td></tr>
+              <tr><td>Bruno</td><td>Teclado</td></tr>
+            </table>
+            <p><small style="color:var(--muted)">Explicação: Carlos (cliente 3) e o Monitor (pedido do cliente 4) sumiram porque não possuem correspondência direta na outra tabela.</small></p>
+          `,
+          quizPrompt: 'O que acontece se uma linha na tabela da esquerda não tiver correspondência na tabela da direita em um INNER JOIN?',
+          options: [
+            { label: 'A linha é omitida do resultado final.', correct: true },
+            { label: 'A linha é exibida preenchendo os campos da direita com NULL.', correct: false }
+          ]
+        },
+        left: {
+          title: 'LEFT JOIN',
+          apresentacao: '<p>O <strong>LEFT JOIN</strong> retorna todas as linhas da tabela da esquerda (clientes), independentemente de terem ou não feito pedidos.</p>' + baseTablesHtml,
+          exemplos: `
+            <p><strong>Query executada:</strong></p>
+            <div class="code-block">SELECT c.nome, p.item\nFROM clientes c\nLEFT JOIN pedidos p ON c.id_cliente = p.id_cliente;</div>
+            <p><strong>Linhas Resultantes:</strong></p>
+            <table class="db-table">
+              <tr><th>nome</th><th>item</th></tr>
+              <tr><td>Ana</td><td>Notebook</td></tr>
+              <tr><td>Ana</td><td>Mouse</td></tr>
+              <tr><td>Bruno</td><td>Teclado</td></tr>
+              <tr><td>Carlos</td><td><span style="color:var(--error); font-weight:bold;">NULL</span></td></tr>
+            </table>
+            <p><small style="color:var(--muted)">Explicação: Todos os clientes da esquerda aparecem. Carlos não comprou nada, portanto suas colunas da direita são preenchidas com NULL.</small></p>
+          `,
+          quizPrompt: 'Em um LEFT JOIN, caso a tabela da direita não possua correspondência, qual o valor atribuído às suas colunas?',
+          options: [
+            { label: 'Valor zero (0)', correct: false },
+            { label: 'Valor NULL', correct: true }
+          ]
+        },
+        right: {
+          title: 'RIGHT JOIN',
+          apresentacao: '<p>O <strong>RIGHT JOIN</strong> preserva todas as linhas da tabela da direita (pedidos), mesmo que o id_cliente associado não exista na tabela da esquerda.</p>' + baseTablesHtml,
+          exemplos: `
+            <p><strong>Query executada:</strong></p>
+            <div class="code-block">SELECT c.nome, p.item\nFROM clientes c\nRIGHT JOIN pedidos p ON c.id_cliente = p.id_cliente;</div>
+            <p><strong>Linhas Resultantes:</strong></p>
+            <table class="db-table">
+              <tr><th>nome</th><th>item</th></tr>
+              <tr><td>Ana</td><td>Notebook</td></tr>
+              <tr><td>Ana</td><td>Mouse</td></tr>
+              <tr><td>Bruno</td><td>Teclado</td></tr>
+              <tr><td><span style="color:var(--error); font-weight:bold;">NULL</span></td><td>Monitor</td></tr>
+            </table>
+            <p><small style="color:var(--muted)">Explicação: Todos os registros de pedidos retornam. O Monitor (vinculado ao id_cliente 4 inexistente) retorna com o campo "nome" como NULL.</small></p>
+          `,
+          quizPrompt: 'Qual tabela tem a garantia de ter todos os seus registros exibidos em um RIGHT JOIN entre X e Y (X RIGHT JOIN Y)?',
+          options: [
+            { label: 'A tabela X (Esquerda)', correct: false },
+            { label: 'A tabela Y (Direita)', correct: true }
+          ]
+        },
+        full: {
+          title: 'FULL OUTER JOIN',
+          apresentacao: '<p>O <strong>FULL OUTER JOIN</strong> combina o comportamento do LEFT e RIGHT. Ele retorna todas as linhas de ambas as tabelas, cruzando os dados onde há paridade.</p>' + baseTablesHtml,
+          exemplos: `
+            <p><strong>Query executada:</strong></p>
+            <div class="code-block">SELECT c.nome, p.item\nFROM clientes c\nFULL OUTER JOIN pedidos p ON c.id_cliente = p.id_cliente;</div>
+            <p><strong>Linhas Resultantes:</strong></p>
+            <table class="db-table">
+              <tr><th>nome</th><th>item</th></tr>
+              <tr><td>Ana</td><td>Notebook</td></tr>
+              <tr><td>Ana</td><td>Mouse</td></tr>
+              <tr><td>Bruno</td><td>Teclado</td></tr>
+              <tr><td>Carlos</td><td><span style="color:var(--error); font-weight:bold;">NULL</span></td></tr>
+              <tr><td><span style="color:var(--error); font-weight:bold;">NULL</span></td><td>Monitor</td></tr>
+            </table>
+            <p><small style="color:var(--muted)">Explicação: União total de escopo. Tanto Carlos (sem compras) quanto o Monitor (sem cliente conhecido) são incluídos com suas respectivas ausências supridas por NULL.</small></p>
+          `,
+          quizPrompt: 'Qual o resultado do FULL OUTER JOIN se ambas as tabelas não possuírem chaves correspondentes?',
+          options: [
+            { label: 'Retorna todas as linhas de ambas, preenchendo as ausências com NULL.', correct: true },
+            { label: 'Ocorre uma falha relacional.', correct: false }
+          ]
+        }
+      };
+
+      const bigQuizQuestions = [
+        {
+          q: "1. Qual palavra-chave é usada junto ao JOIN para filtrar os registros baseando-se em uma condição de igualdade entre chaves?",
+          opts: [{label:"USING apenas", correct:false}, {label:"ON", correct:true}, {label:"WHERE", correct:false}],
+          justification: "A instrução descritiva ON vincula a igualdade lógica das chaves entre as tabelas associadas."
+        },
+        {
+          q: "2. Se você precisa listar todos os Produtos e a quantidade vendida de cada um, incluindo aqueles que NUNCA foram vendidos, qual JOIN deve usar partindo da tabela de Produtos na esquerda?",
+          opts: [{label:"INNER JOIN", correct:false}, {label:"LEFT JOIN", correct:true}, {label:"RIGHT JOIN", correct:false}],
+          justification: "O LEFT JOIN preserva a integridade de todas as linhas da esquerda, mesmo sem registros correspondentes na direita."
+        },
+        {
+          q: "3. O uso excessivo ou incorreto de múltiplos JOINs sem índices apropriados nas tabelas relacionais causa principalmente:",
+          opts: [{label:"Degradação de performance na busca (Slow Queries)", correct:true}, {label:"Erros de sintaxe obrigatórios", correct:false}],
+          justification: "A ausência de indexação força buscas completas sequenciais de disco, derrubando o rendimento da query."
+        },
+        {
+          q: "4. É possível realizar um JOIN de uma tabela com ela mesma (Self JOIN)?",
+          opts: [{label:"Não, tabelas só se conectam externamente", correct:false}, {label:"Sim, muito útil para representar estruturas e heranças hierárquicas", correct:true}],
+          justification: "Auto-relacionamentos (Self JOINs) resolvem dependências na mesma entidade, como ID do Gestor e ID do Funcionário."
+        },
+        {
+          q: "5. Se executarmos um INNER JOIN e nenhuma linha satisfizer a condição estipulada no bloco ON, qual será o retorno?",
+          opts: [{label:"Um conjunto vazio (zero linhas)", correct:true}, {label:"Uma linha preenchida com NULL", correct:false}],
+          justification: "O INNER JOIN requer correspondência mútua estrita; se ela não existir, nenhuma linha é retornada."
+        },
+        {
+          q: "6. Qual operador de junção cria um produto cartesiano completo, emparelhando indiscriminadamente todas as linhas?",
+          opts: [{label:"CROSS JOIN", correct:true}, {label:"NATURAL JOIN", correct:false}],
+          justification: "O CROSS JOIN realiza multiplicação combinatória sem critério de restrição obrigatória."
+        },
+        {
+          q: "7. Ao usar um LEFT JOIN, se filtrarmos na cláusula WHERE por uma coluna da tabela da direita exigindo que ela seja 'IS NULL', o que estamos buscando?",
+          opts: [{label:"Registros da tabela da esquerda que não possuem correspondentes na direita", correct:true}, {label:"Apenas campos duplicados", correct:false}],
+          justification: "Técnica clássica de exclusão em conjuntos (Anti-Join) para isolar registros sem amarra relacional ativa."
+        },
+        {
+          q: "8. Em bancos de dados SQL padrão (ANSI), a palavra-chave 'OUTER' é estritamente obrigatória ao escrever 'LEFT OUTER JOIN'?",
+          opts: [{label:"Sim, omitir gera falha", correct:false}, {label:"Não, 'LEFT JOIN' e 'LEFT OUTER JOIN' são semanticamente idênticos", correct:true}],
+          justification: "O padrão ANSI especifica 'OUTER' como opcional para simplificação de leitura."
+        },
+        {
+          q: "9. O comando 'NATURAL JOIN' realiza a junção de tabelas baseado em qual premissa?",
+          opts: [{label:"Automaticamente em colunas que possuem exatamente o mesmo nome", correct:true}, {label:"Na ordem física dos registros", correct:false}],
+          justification: "O NATURAL JOIN adivinha implicitamente o cruzamento baseando-se na homonímia de atributos."
+        },
+        {
+          q: "10. Se conectarmos 3 tabelas em uma mesma instrução SELECT, quantos blocos da cláusula descritiva 'ON' serão necessários no mínimo?",
+          opts: [{label:"Apenas 1 bloco global", correct:false}, {label:"2 blocos, um para cada acoplamento relacional realizado", correct:true}],
+          justification: "Para unir N tabelas em rede, são necessárias no mínimo (N - 1) cláusulas de interconexão."
+        }
+      ];
+
+      const state = {
+        currentState: 'CB_APRESENTACAO', 
+        completedModules: { inner: false, left: false, right: false, full: false },
+        selectedModule: null,
+        score: { totalQuestions: 0, correctAnswers: 0 },
+        quizValidated: false,
+        currentQuizIndex: 0,
+        userQuizAnswers: []
+      };
+
+      function updateFlowHighlight(flowId) {
+        document.querySelectorAll('.summary-list li').forEach(li => li.classList.remove('active-flow'));
+        const activeLi = document.getElementById(flowId);
+        if(activeLi) activeLi.classList.add('active-flow');
+      }
+
+      function render() {
+        const contentTitle = document.getElementById('contentTitle');
+        const contentBody = document.getElementById('contentBody');
+        const summaryText = document.getElementById('summaryText');
+        const progressBar = document.getElementById('progressBar');
+        const stepLabel = document.getElementById('stepLabel');
+        const backBtn = document.getElementById('backBtn');
+        const nextBtn = document.getElementById('nextBtn');
+
+        backBtn.style.display = 'inline-block';
+        nextBtn.style.display = 'inline-block';
+        nextBtn.textContent = 'Continuar';
+
+        // Detecção automática de destaques para sub-etapas internas das fases
+        if (['CB_APRESENTACAO', 'CB_EXEMPLOS'].includes(state.currentState)) {
+          updateFlowHighlight('flow-1');
+        } else if (state.currentState === 'CB_QUESTOES') {
+          updateFlowHighlight('flow-2');
+        } else if (['CJ_SELECIONAR_MODULO', 'MOD_APRESENTACAO', 'MOD_EXEMPLOS', 'MOD_QUESTOES', 'CJ_FINALIZAR_MODULO'].includes(state.currentState)) {
+          updateFlowHighlight('flow-3');
+        } else if (['QUEST_INTRO', 'QUEST_BATERIA'].includes(state.currentState)) {
+          updateFlowHighlight('flow-4');
+        } else if (['APRESENTAR_NOTAS', 'FIM'].includes(state.currentState)) {
+          updateFlowHighlight('flow-5');
+        }
+
+        switch (state.currentState) {
+          case 'CB_APRESENTACAO':
+            progressBar.style.width = '5%';
+            stepLabel.textContent = 'Conceitos';
+            contentTitle.textContent = 'Conceitos Básicos de JOINs';
+            summaryText.textContent = 'A finalidade da junção de dados relacionais.';
+            contentBody.innerHTML = `
+              <p>No modelo relacional, as informações são distribuídas em tabelas para evitar redundâncias. Os <strong>JOINs</strong> servem para unificar estas linhas baseando-se em campos comuns.</p>
+              <p>Para todos os exemplos práticos que você verá a seguir, considere as seguintes tabelas e dados estáticos de referência:</p>
+            ` + baseTablesHtml;
+            backBtn.style.display = 'none';
+            break;
+
+          case 'CB_EXEMPLOS':
+            progressBar.style.width = '10%';
+            contentTitle.textContent = 'Estrutura de Sintaxe SQL';
+            summaryText.textContent = 'Veja a estrutura básica de acoplamento.';
+            contentBody.innerHTML = `<div class="code-block">SELECT tabelaA.coluna, tabelaB.coluna\nFROM tabelaA\nINNER JOIN tabelaB ON tabelaA.id = tabelaB.id;</div>`;
+            break;
+
+          case 'CB_QUESTOES':
+            progressBar.style.width = '20%';
+            contentTitle.textContent = 'Verificação de Fundamentos';
+            summaryText.textContent = 'Responda para liberar os blocos.';
+            contentBody.innerHTML = `<p>Qual cláusula vincula a igualdade das chaves?</p><div id="quizContainer"></div>`;
+            renderImmediateFeedbackQuiz([{ label: 'WHERE', correct: false }, { label: 'ON', correct: true }], 'CB_QUESTOES');
+            break;
+
+          case 'CJ_SELECIONAR_MODULO':
+            progressBar.style.width = '40%';
+            stepLabel.textContent = 'Módulos';
+            contentTitle.textContent = 'Selecione um Tipo de JOIN';
+            summaryText.textContent = 'Explore os 4 tipos obrigatórios.';
+            
+            let allDone = Object.values(state.completedModules).every(v => v === true);
+            let htmlButtons = '<div class="module-grid">';
+            for(let key in joinDetails) {
+              let isDone = state.completedModules[key] ? ' [OK]' : '';
+              let doneClass = state.completedModules[key] ? 'done' : '';
+              htmlButtons += `<button class="module-btn ${doneClass}" data-mod="${key}"><strong>${joinDetails[key].title}</strong><span>${isDone}</span></button>`;
+            }
+            htmlButtons += '</div>';
+            
+            if(allDone) {
+              htmlButtons += `<div class="feedback success">✓ Todos os módulos feitos! Clique em "Continuar" para iniciar o questionário com correção ao final.</div>`;
+            }
+            contentBody.innerHTML = htmlButtons;
+            nextBtn.style.display = allDone ? 'inline-block' : 'none';
+            
+            document.querySelectorAll('.module-btn').forEach(btn => {
+              btn.addEventListener('click', () => {
+                state.selectedModule = btn.getAttribute('data-mod');
+                state.currentState = 'MOD_APRESENTACAO';
+                state.quizValidated = false;
+                render();
+              });
+            });
+            break;
+
+          case 'MOD_APRESENTACAO':
+            contentTitle.textContent = `${joinDetails[state.selectedModule].title} - Teoria`;
+            contentBody.innerHTML = joinDetails[state.selectedModule].apresentacao;
+            break;
+
+          case 'MOD_EXEMPLOS':
+            contentTitle.textContent = `${joinDetails[state.selectedModule].title} - Resolução Prática`;
+            contentBody.innerHTML = joinDetails[state.selectedModule].exemplos;
+            break;
+
+          case 'MOD_QUESTOES':
+            contentTitle.textContent = `${joinDetails[state.selectedModule].title} - Teste`;
+            contentBody.innerHTML = `<p>${joinDetails[state.selectedModule].quizPrompt}</p><div id="quizContainer"></div>`;
+            renderImmediateFeedbackQuiz(joinDetails[state.selectedModule].options, 'MOD_QUESTOES');
+            break;
+
+          case 'CJ_FINALIZAR_MODULO':
+            state.completedModules[state.selectedModule] = true;
+            contentTitle.textContent = 'Módulo Concluído!';
+            contentBody.innerHTML = `<p>Clique em Continuar para voltar ao menu.</p>`;
+            break;
+
+          case 'QUEST_INTRO':
+            progressBar.style.width = '50%';
+            stepLabel.textContent = 'Questionário';
+            contentTitle.textContent = 'Questionário de Fixação Completa (10 Q)';
+            summaryText.textContent = 'Bateria sem feedback imediato.';
+            contentBody.innerHTML = `
+              <p>Você iniciará um teste contínuo composto por <strong>10 questões técnicas</strong>.</p>
+              <p><strong>Atenção:</strong> Diferente das fases anteriores, você não saberá se acertou ou errou na hora. O gabarito completo, notas e análises serão exibidos exclusivamente na tela final.</p>
+            `;
+            break;
+
+          case 'QUEST_BATERIA':
+            let qIndex = state.currentQuizIndex;
+            let currentQ = bigQuizQuestions[qIndex];
+            
+            let pct = 50 + (qIndex * 4.5);
+            progressBar.style.width = `${pct}%`;
+            stepLabel.textContent = `Q. ${qIndex + 1} de 10`;
+            
+            contentTitle.textContent = `Questão ${qIndex + 1}/10`;
+            summaryText.textContent = `Selecione a opção desejada e avance.`;
+            contentBody.innerHTML = `<p><strong>${currentQ.q}</strong></p><div id="quizContainer"></div>`;
+            
+            renderSilentQuiz(currentQ.opts);
+            break;
+
+          case 'APRESENTAR_NOTAS':
+            progressBar.style.width = '100%';
+            stepLabel.textContent = 'Fim';
+            contentTitle.textContent = 'Resultados & Avaliação Final';
+            summaryText.textContent = 'Revisão integral de erros e acertos.';
+            
+            let totalQ = bigQuizQuestions.length;
+            let correctCount = 0;
+            let reviewHtml = '<div style="margin-top:20px;"><h3>Gabarito & Revisão Técnica</h3>';
+
+            bigQuizQuestions.forEach((question, idx) => {
+              let userChoice = state.userQuizAnswers[idx];
+              let isCorrect = userChoice ? userChoice.correct : false;
+              if (isCorrect) correctCount++;
+
+              reviewHtml += `
+                <div class="review-item">
+                  <span class="review-badge ${isCorrect ? 'correct' : 'incorrect'}">
+                    ${isCorrect ? '✓ ACERTO' : '✕ ERRO'}
+                  </span>
+                  <p><strong>${question.q}</strong></p>
+                  <p>Sua resposta: <em>${userChoice ? userChoice.label : 'Não respondida'}</em></p>
+                  <p style="color:var(--muted); font-size:0.9rem;"><strong>Explicação:</strong> ${question.justification}</p>
+                </div>
+              `;
+            });
+            reviewHtml += '</div>';
+
+            let aproveitamento = Math.round((correctCount / totalQ) * 100);
+            
+            contentBody.innerHTML = `
+              <p>Você completou com êxito todas as etapas previstas.</p>
+              <div class="feedback ${aproveitamento >= 70 ? 'success' : 'error'}" style="font-size:1.1rem;">
+                <strong>Nota Final: ${aproveitamento}% de Aproveitamento</strong><br>
+                Você acertou ${correctCount} de ${totalQ} questões do questionário principal.
+              </div>
+            ` + reviewHtml;
+            
+            nextBtn.textContent = 'Finalizar Curso';
+            break;
+
+          case 'FIM':
+            contentTitle.textContent = 'Sessão Concluída';
+            contentBody.innerHTML = '<p>Simulação encerrada com sucesso. Seus dados de desempenho foram consolidados.</p>';
+            nextBtn.style.display = 'none';
+            break;
+        }
+      }
+
+      function renderImmediateFeedbackQuiz(options, contextStep) {
+        const container = document.getElementById('quizContainer');
+        if(!container) return;
+        container.innerHTML = '';
+        const feedbackDiv = document.createElement('div');
+        feedbackDiv.id = 'quizFeedback';
+        
+        if(!state.quizValidated) document.getElementById('nextBtn').style.display = 'none';
+
+        options.forEach(opt => {
+          const btn = document.createElement('button');
+          btn.className = 'quiz-option';
+          btn.textContent = opt.label;
+          
+          btn.addEventListener('click', () => {
+            Array.from(container.querySelectorAll('.quiz-option')).forEach(b => b.disabled = true);
+            if(opt.correct) {
+              btn.style.background = '#dcfce7';
+              btn.style.borderColor = 'var(--accent)';
+              feedbackDiv.className = 'feedback success';
+              feedbackDiv.textContent = '✓ Correto! Clique em Continuar.';
+              state.quizValidated = true;
+              document.getElementById('nextBtn').style.display = 'inline-block';
+            } else {
+              btn.style.background = '#fee2e2';
+              btn.style.borderColor = 'var(--error)';
+              feedbackDiv.className = 'feedback error';
+              feedbackDiv.textContent = '✕ Incorreto. Retornando para revisão...';
+              setTimeout(() => {
+                if(contextStep === 'CB_QUESTOES') state.currentState = 'CB_APRESENTACAO';
+                if(contextStep === 'MOD_QUESTOES') state.currentState = 'MOD_APRESENTACAO';
+                render();
+              }, 2500);
+            }
+          });
+          container.appendChild(btn);
+        });
+        container.appendChild(feedbackDiv);
+      }
+
+      function renderSilentQuiz(options) {
+        const container = document.getElementById('quizContainer');
+        if(!container) return;
+        container.innerHTML = '';
+
+        let savedAnswer = state.userQuizAnswers[state.currentQuizIndex];
+        
+        if(!savedAnswer) {
+          document.getElementById('nextBtn').style.display = 'none';
+        }
+
+        options.forEach(opt => {
+          const btn = document.createElement('button');
+          btn.className = 'quiz-option';
+          btn.textContent = opt.label;
+          
+          if(savedAnswer && savedAnswer.label === opt.label) {
+            btn.classList.add('selected');
+          }
+
+          btn.addEventListener('click', () => {
+            Array.from(container.querySelectorAll('.quiz-option')).forEach(b => b.classList.remove('selected'));
+            btn.classList.add('selected');
+            
+            state.userQuizAnswers[state.currentQuizIndex] = {
+              label: opt.label,
+              correct: opt.correct
+            };
+            
+            state.quizValidated = true;
+            document.getElementById('nextBtn').style.display = 'inline-block';
+          });
+          container.appendChild(btn);
+        });
+      }
+
+      // IMPLEMENTAÇÃO DOS EVENTOS DE CLIQUE DIRETO NO PAINEL LATERAL
+      document.querySelectorAll('.summary-list li').forEach(item => {
+        item.addEventListener('click', () => {
+          const targetState = item.getAttribute('data-target');
+          state.currentState = targetState;
+          
+          // Tratamento especial para reinicializar os contadores se o usuário saltar para a bateria
+          if (targetState === 'QUEST_INTRO' || targetState === 'QUEST_BATERIA') {
+            state.currentQuizIndex = 0;
+            state.quizValidated = false;
+          }
+          
+          render();
+        });
+      });
+
+      document.getElementById('nextBtn').addEventListener('click', () => {
+        switch (state.currentState) {
+          case 'CB_APRESENTACAO': state.currentState = 'CB_EXEMPLOS'; break;
+          case 'CB_EXEMPLOS': state.currentState = 'CB_QUESTOES'; break;
+          case 'CB_QUESTOES': state.currentState = 'CJ_SELECIONAR_MODULO'; break;
+          case 'CJ_SELECIONAR_MODULO': state.currentState = 'QUEST_INTRO'; break;
+          
+          case 'MOD_APRESENTACAO': state.currentState = 'MOD_EXEMPLOS'; break;
+          case 'MOD_EXEMPLOS': state.currentState = 'MOD_QUESTOES'; break;
+          case 'MOD_QUESTOES': state.currentState = 'CJ_FINALIZAR_MODULO'; break;
+          case 'CJ_FINALIZAR_MODULO': state.currentState = 'CJ_SELECIONAR_MODULO'; break;
+          
+          case 'QUEST_INTRO': 
+            state.currentQuizIndex = 0;
+            state.currentState = 'QUEST_BATERIA'; 
+            state.quizValidated = false;
+            break;
+          case 'QUEST_BATERIA':
+            if (state.currentQuizIndex < bigQuizQuestions.length - 1) {
+              state.currentQuizIndex++;
+              state.quizValidated = !!state.userQuizAnswers[state.currentQuizIndex];
+            } else {
+              state.currentState = 'APRESENTAR_NOTAS';
+            }
+            break;
+          case 'APRESENTAR_NOTAS': state.currentState = 'FIM'; break;
+        }
+        render();
+      });
+
+      document.getElementById('backBtn').addEventListener('click', () => {
+        switch (state.currentState) {
+          case 'CB_EXEMPLOS': state.currentState = 'CB_APRESENTACAO'; break;
+          case 'CB_QUESTOES': state.currentState = 'CB_EXEMPLOS'; break;
+          case 'CJ_SELECIONAR_MODULO': state.currentState = 'CB_QUESTOES'; break;
+          
+          case 'MOD_APRESENTACAO': state.currentState = 'CJ_SELECIONAR_MODULO'; break;
+          case 'MOD_EXEMPLOS': state.currentState = 'MOD_APRESENTACAO'; break;
+          case 'MOD_QUESTOES': state.currentState = 'MOD_EXEMPLOS'; break;
+          case 'CJ_FINALIZAR_MODULO': state.currentState = 'MOD_QUESTOES'; break;
+          
+          case 'QUEST_INTRO': state.currentState = 'CJ_SELECIONAR_MODULO'; break;
+          case 'QUEST_BATERIA':
+            if (state.currentQuizIndex > 0) {
+              state.currentQuizIndex--;
+              state.quizValidated = true; 
+            } else {
+              state.currentState = 'QUEST_INTRO';
+            }
+            break;
+          case 'APRESENTAR_NOTAS': 
+            state.currentQuizIndex = bigQuizQuestions.length - 1;
+            state.currentState = 'QUEST_BATERIA'; 
+            break;
+          case 'FIM': state.currentState = 'APRESENTAR_NOTAS'; break;
+        }
+        render();
+      });
+
+      render();
+    </script>
+  </body>
 </html>
