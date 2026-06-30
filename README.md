@@ -48,7 +48,8 @@ O Objeto de Aprendizagem é destinado a Estudantes de Graduação (Ciência da C
 [Mapa conceitual Junções](https://cmapscloud.ihmc.us:443/rid=22Q3S7MFF-R3VZ8T-VYND0)
 
 ## Mapa Instrucional
-<img width="1616" height="1669" alt="modelo_instrucional" src="https://github.com/user-attachments/assets/f9290145-f132-4e78-82ef-a69d6fc56339" />
+<img width="1813" height="1477" alt="mapa_instrucional" src="https://github.com/user-attachments/assets/5c005cc3-f615-46c8-b4a7-7a3713b6d2be" />
+
 
 ## Instruções e arquivos necessários para a construção do objeto de aprendizagem
 O objeto de aprendizagem foi desenvolvido no arquivo ```objeto-aprendizagem.html``` utilizando html e javascript para controle do fluxo, ele pode ser acessado por meio de um navegador web.
