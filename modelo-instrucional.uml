@@ -8,37 +8,44 @@ state joins{
     state exemplos
     state questoes
   }
-  
-  state inner_join {
-    state apresentacao
-    state exemplos
-    state questoes
+
+  state conceitos_join{
+    state selecionar_modulo{
+      
+    }
+
+    state finalizar_modulo{
+
+    }
+
+    state inner_join {
+      state apresentacao
+      state exemplos
+      state questoes
+    }
+    state left_join {
+      state apresentacao
+      state exemplos
+      state questoes
+    }
+    state right_join {
+      state apresentacao
+      state exemplos
+      state questoes
+    }
+    state full_outer_join {
+      state apresentacao
+      state exemplos
+      state questoes
+    }
   }
-  
-  state left_join {
-    state apresentacao
-    state exemplos
-    state questoes
-  }
-  
-  state right_join {
-    state apresentacao
-    state exemplos
-    state questoes
-  }
-  
-  state full_outer_join {
-    state apresentacao
-    state exemplos
-    state questoes
-  }
-  
+
   state consultas_complexas {
     state apresentacao
     state exemplos
     state questoes
   }
-  
+
 ' ========================================================
 ' Bloco 1: Conceitos e Fundamentos do JOIN
 ' ========================================================
@@ -46,35 +53,47 @@ state joins{
   conceitos_basicos.apresentacao --> conceitos_basicos.exemplos: concluirApresentacao
   conceitos_basicos.exemplos --> conceitos_basicos.questoes: concluirExemplos
   conceitos_basicos.questoes --> conceitos_basicos.apresentacao: respostaIncorreta
-  conceitos_basicos.questoes ---> inner_join.apresentacao: respostaCorreta
-    
+  conceitos_basicos.questoes ---> conceitos_join.selecionar_modulo: respostaCorreta
+
 ' ========================================================
 ' Bloco 2: Tipos de JOIN (Navegação Sequencial Educativa)
 ' ========================================================
+' Transição módulos de join
+  conceitos_join.selecionar_modulo --> conceitos_join.inner_join: selecionarInnerJoin
+  conceitos_join.selecionar_modulo --> conceitos_join.left_join: selecionarLeftJoin
+  conceitos_join.selecionar_modulo --> conceitos_join.right_join: selecionarRightJoin
+  conceitos_join.selecionar_modulo --> conceitos_join.full_outer_join: selecionarFullOuterJoin
 ' Sub-bloco 2.1: Inner Join
-  inner_join.apresentacao --> inner_join.exemplos: concluirApresentacao
-  inner_join.exemplos --> inner_join.questoes: concluirExemplos
-  inner_join.questoes --> inner_join.apresentacao: respostaIncorreta
-  inner_join.questoes --> left_join.apresentacao: respostaCorreta
-  
+  conceitos_join.inner_join.apresentacao --> conceitos_join.inner_join.exemplos: concluirApresentacao
+  conceitos_join.inner_join.exemplos --> conceitos_join.inner_join.questoes: concluirExemplos
+  conceitos_join.inner_join.questoes --> conceitos_join.inner_join.apresentacao: respostaIncorreta
+  conceitos_join.inner_join.questoes -down-> conceitos_join.finalizar_modulo: respostaCorreta
+
 ' Sub-bloco 2.2: Left Join
-  left_join.apresentacao --> left_join.exemplos: concluirApresentacao
-  left_join.exemplos --> left_join.questoes: concluirExemplos
-  left_join.questoes --> left_join.apresentacao: respostaIncorreta
-  left_join.questoes --> right_join.apresentacao: respostaCorreta
-  
+  conceitos_join.left_join.apresentacao --> conceitos_join.left_join.exemplos: concluirApresentacao
+  conceitos_join.left_join.exemplos --> conceitos_join.left_join.questoes: concluirExemplos
+  conceitos_join.left_join.questoes --> conceitos_join.left_join.apresentacao: respostaIncorreta
+  conceitos_join.left_join.questoes -down-> conceitos_join.finalizar_modulo: respostaCorreta
+
 ' Sub-bloco 2.3: Right Join
-  right_join.apresentacao --> right_join.exemplos: concluirApresentacao
-  right_join.exemplos --> right_join.questoes: concluirExemplos
-  right_join.questoes --> right_join.apresentacao: respostaIncorreta
-  right_join.questoes --> full_outer_join.apresentacao: respostaCorreta
-  
+  conceitos_join.right_join.apresentacao --> conceitos_join.right_join.exemplos: concluirApresentacao
+  conceitos_join.right_join.exemplos --> conceitos_join.right_join.questoes: concluirExemplos
+  conceitos_join.right_join.questoes --> conceitos_join.right_join.apresentacao: respostaIncorreta
+  conceitos_join.right_join.questoes -down-> conceitos_join.finalizar_modulo: respostaCorreta
+
 ' Sub-bloco 2.4: Full Outer Join
-  full_outer_join.apresentacao --> full_outer_join.exemplos: concluirApresentacao
-  full_outer_join.exemplos --> full_outer_join.questoes: concluirExemplos
-  full_outer_join.questoes --> full_outer_join.apresentacao: respostaIncorreta
-  full_outer_join.questoes --> consultas_complexas.apresentacao: respostaCorreta
-  
+  conceitos_join.full_outer_join.apresentacao --> conceitos_join.full_outer_join.exemplos: concluirApresentacao
+  conceitos_join.full_outer_join.exemplos --> conceitos_join.full_outer_join.questoes: concluirExemplos
+  conceitos_join.full_outer_join.questoes --> conceitos_join.full_outer_join.apresentacao: respostaIncorreta
+  conceitos_join.full_outer_join.questoes -down-> conceitos_join.finalizar_modulo: respostaCorreta
+
+' Transição apresentar_notas
+  conceitos_join.apresentar_notas -up-> conceitos_join.selecionar_modulo: moduloIncompleto
+  conceitos_join.apresentar_notas : Estado intermediário para organização
+
+' Transição finalizar_modulo
+  conceitos_join.finalizar_modulo --up-> conceitos_join.apresentar_notas: moduloIncompleto
+  conceitos_join.finalizar_modulo -down-> consultas_complexas.apresentacao: modulosCompletos
 ' ========================================================
 ' Bloco 3: Exemplos de Consultas Complexas
 ' ========================================================
@@ -83,5 +102,4 @@ state joins{
   consultas_complexas.questoes --> consultas_complexas.apresentacao: respostaIncorreta
   consultas_complexas.questoes --> [*]: concluirModulo
 }
-
 @enduml
