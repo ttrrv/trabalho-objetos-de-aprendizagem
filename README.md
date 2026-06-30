@@ -48,7 +48,8 @@ O Objeto de Aprendizagem é destinado a Estudantes de Graduação (Ciência da C
 [Mapa conceitual Junções](https://cmapscloud.ihmc.us:443/rid=22Q3S7MFF-R3VZ8T-VYND0)
 
 ## Mapa Instrucional
-<img width="1740" height="1582" alt="modelo_instrucional" src="https://github.com/user-attachments/assets/0761646d-e77d-4d08-8730-b646a6d1afaa" />
+<img width="1616" height="1669" alt="modelo_instrucional" src="https://github.com/user-attachments/assets/f9290145-f132-4e78-82ef-a69d6fc56339" />
+
 
 
 
