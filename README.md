@@ -50,6 +50,9 @@ O Objeto de Aprendizagem é destinado a Estudantes de Graduação (Ciência da C
 ## Mapa Instrucional
 <img width="1813" height="1477" alt="mapa_instrucional" src="https://github.com/user-attachments/assets/5c005cc3-f615-46c8-b4a7-7a3713b6d2be" />
 
+## Objeto de Aprendizagem
+[Link](https://ttrrv.github.io/trabalho-objetos-de-aprendizagem/)
+
 
 ## Instruções e arquivos necessários para a construção do objeto de aprendizagem
 O objeto de aprendizagem foi desenvolvido no arquivo ```objeto-aprendizagem.html``` utilizando html e javascript para controle do fluxo, ele pode ser acessado por meio de um navegador web.
