@@ -55,4 +55,4 @@ O Objeto de Aprendizagem é destinado a Estudantes de Graduação (Ciência da C
 
 
 ## Instruções e arquivos necessários para a construção do objeto de aprendizagem
-O objeto de aprendizagem foi desenvolvido no arquivo ```objeto-aprendizagem.html``` utilizando html e javascript para controle do fluxo, ele pode ser acessado por meio de um navegador web.
+O objeto de aprendizagem foi desenvolvido no arquivo ```docs/index.html``` utilizando html e javascript para controle do fluxo, ele pode ser acessado por meio de um navegador web.
